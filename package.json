@@ -1,0 +1,26 @@
+{
+  "name": "responses-mentalia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adecuellarv/responses-mentalia.git"
+  },
+  "author": "adecuellarv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adecuellarv/responses-mentalia/issues"
+  },
+  "homepage": "https://github.com/adecuellarv/responses-mentalia#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "openpay": "^1.0.5"
+  }
+}
