@@ -28,20 +28,7 @@ app.post('/api/v1/charge/card', function (req, res) {
                     const body = response?.body;
                     res.statusCode = 201;
                     res.setHeader('Content-Type', 'application/json');
-                    res.end(JSON.stringify({
-                        "status_code": response?.statusCode,
-                        "data": {
-                            "id": body?.id,
-                            "authorization": body?.authorization,
-                            "operation_type": body?.operation_type,
-                            "transaction_type": body?.transaction_type,
-                            "status": body?.status,
-                            "creation_date": body?.creation_date,
-                            "operation_date": body?.operation_date,
-                            "description": body?.description,
-                            "order_id": body?.order_id
-                        }
-                    }))
+                    res.end(JSON.stringify(body));
                 }
             });
         } catch (error) {
