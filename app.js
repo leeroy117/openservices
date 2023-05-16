@@ -2,14 +2,17 @@ const Express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Openpay = require('openpay');
+const { sendMailTest } = require('./emails.js')
 
 const app = Express();
 app.use(cors());
 app.options('*', cors());
 //app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-var openpay = new Openpay('mbipwocgkvgkndoykdgg', 'sk_252732b74920457099f62651857894ef', false);
+const dashboardopenpay = 'https://sandbox-dashboard.openpay.mx';
+const bussinesid = 'mbipwocgkvgkndoykdgg';
+const privateKey = 'sk_252732b74920457099f62651857894ef';
+var openpay = new Openpay(bussinesid, privateKey, false);
 
 const port = 8080;
 
@@ -29,6 +32,9 @@ app.post('/api/v1/charge/card', function (req, res) {
                     res.statusCode = 201;
                     res.setHeader('Content-Type', 'application/json');
                     res.end(JSON.stringify(body));
+                    if(body?.status === 'completed'){
+                        sendMailTest(body?.amount, body?.order_id, null, 1);
+                    }
                 }
             });
         } catch (error) {
@@ -53,6 +59,8 @@ app.post('/api/v1/charge/store', function (req, res) {
                 res.statusCode = 201;
                 res.setHeader('Content-Type', 'application/json');
                 res.end(JSON.stringify(body));
+                const urlpdf = `${dashboardopenpay}/paynet-pdf/${bussinesid}/${body?.payment_method?.reference}`
+                sendMailTest(null, null, urlpdf, 2);
             }
         });
     }
