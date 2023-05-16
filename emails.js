@@ -60,6 +60,46 @@ const htmlSucessCash = (link) => {
     return html;
 }
 
+const htmlpaymentFailed = () => {
+    const html = `
+            <!DOCTYPE html>
+            <html>
+                <body>
+                
+                <table style="width:100%">
+                <tr style="background: #a42d24; height: 300px">
+                    <th style="color: #fff; font-size: 53px">Pago no generado</th>
+                </tr>
+                <tr>
+                    <td style="height: 300px; font-size: 18px; text-align: center;">
+                    <h2>No se pudo procesar tu pago, favor de intentar nuevamente</h2>
+                    <p>Para cualquier aclaración contacta a <strong>contacto@academiadigital.com</strong></p>
+                                
+                    </td>
+                </tr>
+                </table>
+            
+            </body>
+            </html>
+    `;
+
+    return html;
+}
+
+const getSubject = (type) => {
+    switch (type) {
+        case 1:
+            return 'Academia global, pago generado'
+        case 2:
+            return 'Academia global, referencia de pago'
+        case 3:
+            return 'Academia global, error al general el pago'
+
+        default:
+            break;
+    }
+}
+
 // async..await is not allowed in global scope, must use a wrapper
 const sendMailTest = async (total, ref, link, type) => {
     //async function sendMailTest() {
@@ -80,11 +120,11 @@ const sendMailTest = async (total, ref, link, type) => {
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-        from: '"Fred Foo 👻" <ade.cuellar92@gmail.com>', // sender address
+        from: '<ade.cuellar92@gmail.com>', // sender address
         to: "ade.cuellar91@gmail.com", // list of receivers
-        subject: "Hello2 ✔", // Subject line
+        subject: getSubject(type), // Subject line
         //text: "Hello world?", // plain text body
-        html: type === 1 ? htmlSucessCard(total, ref) : htmlSucessCash(link) //"<b>Hello world?</b>", // html body
+        html: type === 1 ? htmlSucessCard(total, ref) : type === 2 ? htmlSucessCash(link) : htmlpaymentFailed() //"<b>Hello world?</b>", // html body
     });
 
     console.log("Message sent: %s", info.messageId);
