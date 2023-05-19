@@ -16,7 +16,7 @@ const htmlSucessCard = (total, ref) => {
                 <h2>Hemos recibido tu pago</h2>
                 <p>Total de tu pago: <strong>$${total} MXN</strong></p>
                 <p>Número de referencia: <strong>${ref}</strong></p>
-                <p>Para cualquier aclaración contacta a <strong>contacto@academiadigital.com</strong></p>
+                <p style="font-size:9px;">Para cualquier aclaración contacta a <strong>contacto@academiadigital.com</strong></p>
                 </td>
             </tr>
             </table>
@@ -36,7 +36,7 @@ const htmlSucessCash = (link) => {
                 
                 <table style="width:100%">
                 <tr style="background: #03A9F4; height: 300px">
-                    <th style="color: #fff; font-size: 53px">Descarga tu folio de pago</th>
+                    <th style="color: #fff; font-size: 53px">Información para tu pago</th>
                 </tr>
                 <tr>
                     <td style="height: 300px; font-size: 18px; text-align: center;">
@@ -46,8 +46,9 @@ const htmlSucessCash = (link) => {
                     border: 0px;
                     border-radius: 5px;
                     cursor: pointer;"  href="${link}" target="_blank">Link de descarga</a>
-                    <p>${link}</p>
-                    <p>Para cualquier aclaración contacta a <strong>contacto@academiadigital.com</strong></p>
+                    <p><strong>Nota:</strong> Si no puedes dar click en el botón de descarga copia y pega este link:</p>
+                    <p style="color:#03A9F4; font-size: 12px;">${link}</p>
+                    <p style="font-size:9px;">Para cualquier aclaración contacta a <strong>contacto@academiadigital.com</strong></p>
                                 
                     </td>
                 </tr>

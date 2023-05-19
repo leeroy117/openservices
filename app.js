@@ -59,7 +59,11 @@ app.post('/api/v1/charge/store', function (req, res) {
                 res.statusCode = 201;
                 res.setHeader('Content-Type', 'application/json');
                 res.end(JSON.stringify(body));
-                const urlpdf = `${dashboardopenpay}/paynet-pdf/${bussinesid}/${body?.payment_method?.reference}`
+                let urlpdf = ''
+                if(req?.body?.data?.method === 'store')
+                    urlpdf = `${dashboardopenpay}/paynet-pdf/${bussinesid}/${body?.payment_method?.reference}`
+                else urlpdf = `${dashboardopenpay}/spei-pdf/${bussinesid}/${body?.id}`
+                
                 sendMailTest(null, null, urlpdf, 2);
             }
         });
