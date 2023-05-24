@@ -32,7 +32,7 @@ app.post('/api/v1/charge/card', function (req, res) {
                     res.statusCode = 201;
                     res.setHeader('Content-Type', 'application/json');
                     res.end(JSON.stringify(body));
-                    if(body?.status === 'completed'){
+                    if (body?.status === 'completed') {
                         sendMailTest(body?.amount, body?.order_id, null, 1);
                     }
                 }
@@ -60,10 +60,10 @@ app.post('/api/v1/charge/store', function (req, res) {
                 res.setHeader('Content-Type', 'application/json');
                 res.end(JSON.stringify(body));
                 let urlpdf = ''
-                if(req?.body?.data?.method === 'store')
+                if (req?.body?.data?.method === 'store')
                     urlpdf = `${dashboardopenpay}/paynet-pdf/${bussinesid}/${body?.payment_method?.reference}`
                 else urlpdf = `${dashboardopenpay}/spei-pdf/${bussinesid}/${body?.id}`
-                
+
                 sendMailTest(null, null, urlpdf, 2);
             }
         });
@@ -89,6 +89,13 @@ app.post('/api/v1/charge/create_customer', function (req, res) {
             }
         });
     }
+});
+
+app.post('/api/v1/charges/listener', function (req, res) {
+    /*openpay.webhooks.get('wxvanstudf4ssme8khmc', function (error, webhook) {
+        
+    });*/
+    res.end(JSON.stringify({"registro": "ok"}));
 });
 
 
