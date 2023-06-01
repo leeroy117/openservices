@@ -95,6 +95,12 @@ app.post('/api/v1/charges/listener', function (req, res) {
     /*openpay.webhooks.get('wxvanstudf4ssme8khmc', function (error, webhook) {
         
     });*/
+    const body = req?.body;
+    console.log('___bodyopenpay___', body);
+    if(body?.verification_code){
+        console.log('__codigoverificacion_', body?.verification_code);
+    }
+    
     res.end(JSON.stringify({"registro": "ok"}));
 });
 
