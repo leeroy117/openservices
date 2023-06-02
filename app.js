@@ -92,13 +92,26 @@ app.post('/api/v1/charge/create_customer', function (req, res) {
 });
 
 app.post('/api/v1/charges/listener', function (req, res) {
-    /*openpay.webhooks.get('wxvanstudf4ssme8khmc', function (error, webhook) {
-        
-    });*/
+    /*
+    openpay.webhooks.get('wsdwhuz6spxxkmhm7h7d', function (error, webhook) {
+    });
     const body = req?.body;
     console.log('___bodyopenpay___', body);
     if(body?.verification_code){
         console.log('__codigoverificacion_', body?.verification_code);
+    }*/
+    const body = req?.body;
+    if(body?.type === 'charge.succeeded' && body?.transaction?.id){
+        const transactioninfo = body?.transaction;
+        const obj = {
+            status: transactioninfo?.status,
+            order_id: transactioninfo?.order_id,
+            authorization: transactioninfo?.authorization,
+            id: transactioninfo?.id
+        }
+        console.log('__showobjinfo__', obj);
+    }else{
+        console.log('__errorbut__', body);
     }
     
     res.end(JSON.stringify({"registro": "ok"}));
