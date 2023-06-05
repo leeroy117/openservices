@@ -101,7 +101,7 @@ app.post('/api/v1/charges/listener', function (req, res) {
         console.log('__codigoverificacion_', body?.verification_code);
     }*/
     const body = req?.body;
-    if(body?.type === 'charge.succeeded' && body?.transaction?.id){
+    if(body?.type == 'charge.succeeded' && body?.transaction?.id != ''){
         const transactioninfo = body?.transaction;
         const obj = {
             status: transactioninfo?.status,
