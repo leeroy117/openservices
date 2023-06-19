@@ -1,28 +1,24 @@
 {
-  "name": "responses-mentalia",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/adecuellarv/responses-mentalia.git"
-  },
-  "author": "adecuellarv",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/adecuellarv/responses-mentalia/issues"
-  },
-  "homepage": "https://github.com/adecuellarv/responses-mentalia#readme",
-  "dependencies": {
-    "body-parser": "^1.20.0",
-    "candymail": "^1.0.22",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "nodemailer": "^6.9.2",
-    "openpay": "^1.0.5"
-  }
+    "main": "main.js",
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.2",
+        "express-validator": "^7.0.1",
+        "moment": "^2.29.1",
+        "mysql2": "^2.3.3",
+        "openpay": "^1.0.5",
+        "socket.io": "^4.4.1",
+        "ssh2": "^1.6.0",
+        "nodemailer": "^6.9.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    },
+    "scripts": {
+        "serve": "nodemon main.js",
+        "start": "node main.js"
+    }
 }
