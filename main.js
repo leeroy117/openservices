@@ -56,7 +56,7 @@ body('source_id').notEmpty().withMessage('El campo source_id es necesario'),
             const response_body = response?.body;
 
             if (body?.status === 'completed') {
-                sendMailTest(response_body?.amount, response_body?.order_id, null, 1);
+                sendMailTest(response_body?.amount, response_body?.id, null, 1);
             }
 
             return res.status(201).json(response_body);
