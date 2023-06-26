@@ -36,7 +36,6 @@ app.use("/api/v1/pasarela", require('./routes/pagosServiciosRouter'));
 app.post('/api/v1/charge/card',
 body('source_id').notEmpty().withMessage('El campo source_id es necesario'),
 (req, res) => {
-    console.log('entro');
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -56,7 +55,7 @@ body('source_id').notEmpty().withMessage('El campo source_id es necesario'),
             const response_body = response?.body;
 
             if (body?.status === 'completed') {
-                sendMailTest(response_body?.amount, response_body?.id, null, 1);
+                sendMailTest(response_body?.amount, response_body?.id, null, 1, req?.body?.customer?.email);
             }
 
             return res.status(201).json(response_body);
@@ -105,7 +104,7 @@ app.post('/api/v1/charge/store', function (req, res) {
                     urlpdf = `${dashboardopenpay}/paynet-pdf/${bussinesid}/${body?.payment_method?.reference}`
                 else urlpdf = `${dashboardopenpay}/spei-pdf/${bussinesid}/${body?.id}`
                 
-                sendMailTest(null, null, urlpdf, 2);
+                sendMailTest(null, null, urlpdf, 2, req?.body?.email);
                 return res.status(201).json(response?.body);
             });
         } catch (error) {

@@ -102,7 +102,7 @@ const getSubject = (type) => {
 }
 
 // async..await is not allowed in global scope, must use a wrapper
-const sendMailTest = async (total, ref, link, type) => {
+const sendMailTest = async (total, ref, link, type, email) => {
     //async function sendMailTest() {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
@@ -124,7 +124,7 @@ const sendMailTest = async (total, ref, link, type) => {
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: '<dt_pagos@academiaglobal.mx>', // sender address
-        to: ["ade.cuellar91@gmail.com","leeroy.garcia@aggroup.com.mx"], // list of receivers
+        to: ["ade.cuellar91@gmail.com","leeroy.garcia@aggroup.com.mx", email], // list of receivers
         subject: getSubject(type), // Subject line
         //text: "Hello world?", // plain text body
         html: type === 1 ? htmlSucessCard(total, ref) : type === 2 ? htmlSucessCash(link) : htmlpaymentFailed() //"<b>Hello world?</b>", // html body
