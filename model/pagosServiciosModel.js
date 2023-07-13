@@ -351,34 +351,7 @@ const actualizarPagoCash = (body) => {
 
     return new Promise(async (resolve, reject) => {
         
-        // const body  = {
-        //     type: 'charge.succeeded',
-        //     event_date: '2023-06-02T14:33:09-06:00',
-        //     transaction: {
-        //         id: 'tr8tjvm2n42pza9xvuvs',
-        //         authorization: '757257',
-        //         operation_type: 'in',
-        //         transaction_type: 'charge',
-        //         status: 'completed',
-        //         conciliated: false,
-        //         creation_date: '2023-06-02T13:31:35-06:00',
-        //         operation_date: '2023-06-02T14:33:08-06:00',
-        //         description: 'CONSTANCIA ESTUDIOS',
-        //         error_message: null,
-        //         order_id: null,
-        //         customer_id: 'apaaqubisd4xeuukiij5',
-        //         amount: 105.4,
-        //         fee: { amount: 5.5566, tax: 0.8891, currency: 'MXN' },
-        //         payment_method: {
-        //             type: 'store',
-        //             reference: '1010103796002496',
-        //             barcode_url: 'https://sandbox-api.openpay.mx/barcode/1010103796002496',
-        //             url_store: 'https://sandbox-api.openpay.mx/v1/mbipwocgkvgkndoykdgg/customers/7952650/tru03o50z1jmlgioiexo/store_confirm'
-        //         },
-        //         currency: 'MXN',
-        //         method: 'store'
-        //     }
-        // };
+        
         
         try {
             const {

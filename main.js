@@ -23,6 +23,7 @@ app.use(express.json());
 const dashboardopenpay = 'https://sandbox-dashboard.openpay.mx';
 // const bussinesid = 'mbipwocgkvgkndoykdgg';
 // const privateKey = 'sk_252732b74920457099f62651857894ef';
+//our private_key
 const bussinesid = 'm8qrwxynurdz6r7m9p4i';
 const privateKey = 'sk_bd7bceeb812e45e8b79d579da88da702';
 var openpay = new Openpay(bussinesid, privateKey, false);
@@ -181,49 +182,6 @@ app.get('/api/v1/charges/get_verification_codes', (req, res) => {
         });
 });
 
-
-io.on("connection", async function(socket) {
-    const usuario = socket.handshake.query;
-    const id_sesion = socket.id;
-
-    socket.join(usuario.id_moodle);
-    console.log("alumno conectado");
-
-    //guarda el inicio de sesion
-    if (!usuarios[usuario.id_moodle]) {
-        usuarios[usuario.id_moodle] = { id_moodle: usuario.id_moodle, numero_empleado: usuario.numero_empleado, sesiones_activas: [], login: moment().format("YYYY/MM/DD hh:mm:ss") };
-    }
-
-    usuarios[usuario.id_moodle].sesiones_activas.push({ login: moment().format("YYYY/MM/DD hh:mm:ss"), tipo: usuario.tipo, id_sesion: id_sesion, ip: usuario.ip, navegador: usuario.navegador, so: usuario.so });
-
-    socket.to(usuario.id_moodle).emit("examenes_activos", usuarios[usuario.id_moodle].sesiones_activas);
-    socket.emit("examenes_activos", usuarios[usuario.id_moodle].sesiones_activas);
-
-    socket.on('disconnect', function() {
-        let a = '';
-        let b = moment().format("YYYY/MM/DD hh:mm:ss");
-
-        for (let [index, log] of usuarios[usuario.id_moodle].sesiones_activas.entries()) {
-            if (log.id_sesion == id_sesion) {
-                a = log.login
-                usuarios[usuario.id_moodle].sesiones_activas.splice(index);
-
-                console.log("alumno desconectado" + usuarios[usuario.id_moodle].sesiones_activas.length);
-
-                if (usuarios[usuario.id_moodle].sesiones_activas.length == 0) {
-                    var query = `
-                        CALL escolar.sp_setSesion(${usuario.id_moodle},${usuario.id_moodle},${usuario.id_moodle},'${usuario.login}','${b}')
-                    `;
-
-                    connection.invokeQuery(query, function(results) {
-                        console.log(results)
-                    });
-                }
-            }
-        }
-
-    });
-});
 
 server.listen(8080, function() {
     console.log("Servidor corriendo en http://localhost:8080");
