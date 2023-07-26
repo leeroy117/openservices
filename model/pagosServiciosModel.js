@@ -537,7 +537,7 @@ const updateIdOpenPay = (body) => {
 
     return new Promise((resolve, reject) => {
         try {
-            const query = `CALL escolar.sp_update_open_pay(
+            const query = `CALL escolar.sp_pasarela_update_open_pay(
                 ${id_plan_estudio},
                 ${id_moodle_alumno},
                 '${id_open_pay}',

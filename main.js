@@ -11,7 +11,7 @@ const Openpay = require('openpay');
 const { body, validationResult, check } = require('express-validator');
 const { sendMailTest } = require('./herramientas/emails/emails');
 const { insertVerificationCode, getVerificationCodes, registrarPagoCash, actualizarPagoCash } = require("./model/pagosServiciosModel");
-
+require('dotenv').config();
 
 var usuarios = [];
 
@@ -27,6 +27,10 @@ const dashboardopenpay = 'https://sandbox-dashboard.openpay.mx';
 const bussinesid = 'm8qrwxynurdz6r7m9p4i';
 const privateKey = 'sk_bd7bceeb812e45e8b79d579da88da702';
 var openpay = new Openpay(bussinesid, privateKey, false);
+
+app.get("/", function(req, res) {
+    res.status(200).send("API running!");
+});
 
 app.get("/hello", function(req, res) {
     res.status(200).send("Hello World!");
@@ -184,5 +188,5 @@ app.get('/api/v1/charges/get_verification_codes', (req, res) => {
 
 
 server.listen(8080, function() {
-    console.log("Servidor corriendo en http://localhost:8080");
+    console.log(`Servidor corriendo en http://localhost:8080 environment=${process.env.NODE_ENV}`);
 });
